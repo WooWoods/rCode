@@ -199,7 +199,21 @@ ggplot(data=df, aes(x=type, y=num, fill=genotype)) +
 # boxplot 
 p <- ggboxplot(tmp2, x='group', y='ILMN_1691714', color='group', add='jitter')
 p + stat_compare_means(method='t.test')
+		 
 
+ggplot(vln.df, aes(cellType,exp, fill=cellType))+geom_violin(scale = "width")+
+  facet_grid(vln.df$gene~.,scales = "free_y")+
+#   scale_fill_brewer(palette = "Set3",direction = 1)+
+  scale_x_discrete("")+scale_y_continuous("")+
+#   scale_color_manual(values=c('#F8766D', '#8DD3C7'))+
+  theme_bw()+
+  theme(
+    axis.text.x.bottom = element_text(angle = 45,hjust = 1,vjust = 1),
+    panel.grid.major = element_blank(),panel.grid.minor = element_blank()
+#     legend.position = "none"
+  )
+ggsave("result/hubs_vln1.pdf",width = 20,height = 20,units = "cm")
+		 
 
 ##### 两组基因表达dotplot
 ggplot(df_tfs_expr, aes(x=sample_type.samples, y=FCER2, fill=sample_type.samples)) + 
